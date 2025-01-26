@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audify Music </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <div class="main-content">
+            <!-- App name -->
+            <div class="app-name">
+                <h1>🎵Audify</h1>
+            </div>
+
+            <!-- Add navigation bar -->
+            <div class="nav-bar">
+                <div class="nav-buttons">
+                    <button class="nav-button active" data-section="now-playing">
+                        <i class="ri-home-4-line"></i>
+                        Home
+                    </button>
+                    <button class="nav-button" data-section="downloads">
+                        <i class="ri-download-2-line"></i>
+                        Downloads
+                    </button>
+                    <button class="nav-button" data-section="playlists">
+                        <i class="ri-playlist-line"></i>
+                        Playlist
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search bar moved to top -->
+            <div class="search-container">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="What do you want to listen to?">
+                    <button id="searchBtn"><i class="ri-search-line"></i></button>
+                    <div class="search-progress" id="searchProgress"></div>
+                </div>
+            </div>
+
+            <!-- Welcome message -->
+            <div class="welcome-message" id="welcomeMessage">
+                <h1>Welcome to Audify Music</h1>
+                <p>Try searching something to get started or listen to downloads</p>
+            </div>
+
+            <!-- Add mini player 
+            <div class="mini-player">
+                <div class="mini-track-info">
+                    
+                    <div class="mini-text">
+                        <h4 id="miniTitle">No track selected</h4>
+                        <p id="miniArtist"></p>
+                    </div>
+                </div>
+            </div>
+            -->
+
+            <!-- Modified now playing section -->
+            <div class="now-playing-top hidden" id="nowPlayingSection">
+                <h2>Home</h2>
+                <div class="recommended-songs-grid" id="recommendedSongs"></div>
+            </div>
+            
+            <!-- Downloads section -->
+            <div class="downloads-section">
+                <div class="downloads-header" id="downloadsHeader">
+                    <h2>Downloaded Songs</h2>
+                    <button class="toggle-downloads">
+                        <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                </div>
+                <div id="downloadsList" class="downloads-grid collapsed">
+                    <div class="no-downloads-message" style="display: none">
+                        No downloaded songs yet
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Playlists section -->
+            <div class="playlists-section">
+                <div class="playlists-header">
+                    <h2>Playlists</h2>
+                    <div class="playlist-buttons">
+                        <button class="create-playlist-btn">
+                            <i class="ri-add-line"></i> Create Playlist
+                        </button>
+                        <button class="import-spotify-btn">
+                            <i class="ri-spotify-fill"></i> Import from Spotify
+                        </button>
+                    </div>
+                </div>
+                <div class="playlists-grid" id="playlistsGrid"></div>
+            </div>
+
+        </div>
+
+        <button class="toggle-upnext-large" id="toggleUpNext">
+            <i class="ri-arrow-right-s-line"></i>
+        </button>
+
+
+        <!-- Up next section -->
+        <div class="up-next-section">
+            <div class="section-header">
+                <h2>Up Next</h2>
+                <div class="section-controls">
+                    <label class="autoplay-toggle">
+                        <input type="checkbox" id="autoplayToggle" checked>
+                        <label for="autoplayToggle"></label>
+                        <span>Autoplay</span>
+                    </label>
+                </div>
+            </div>
+            <div class="queue-list" id="queueList"></div>
+            <button id="loadMoreBtn" class="load-more-btn">Load More</button>
+        </div>
+
+        <div class="player-controls hidden" id="playerControls">
+            
+            <div class="progress-bar-container">
+                <div class="progress-info">
+                    <div class="progress-thumbnail">
+                        <img id="progressThumbnail" src="/static/default-thumbnail.png" alt="Current track">
+                    </div>
+                    <div class="progress-track-info">
+                        <h4 id="progressTitle">No track selected</h4>
+                        <p id="progressArtist"></p>
+                    </div>
+                    <div class="time">
+                        <span id="currentTime">0:00</span>
+                        <span>/</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                </div>
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress" id="progress"></div>
+                    <div class="progress-hover" id="progressHover"></div>
+                </div>
+            </div>
+            <div class="controls">
+                <button id="shuffleBtn"><i class="ri-shuffle-line"></i></button>
+                <button id="prevBtn"><i class="ri-skip-back-fill"></i></button>
+                <button id="playPauseBtn"><i class="ri-play-fill"></i></button>
+                <button id="nextBtn"><i class="ri-skip-forward-fill"></i></button>
+                <button id="loopBtn"><i class="ri-repeat-line"></i></button>
+                <div class="volume-control">
+                    <i class="ri-volume-up-fill"></i>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="100">
+                </div>
+                <div class="download-button-container">
+                    <svg class="download-progress" viewBox="0 0 36 36">
+                        <circle cx="18" cy="18" r="16" fill="none" stroke="var(--accent-color)" stroke-width="2"></circle>
+                    </svg>
+                    <button id="downloadBtn"><i class="ri-download-2-line"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+    
+</body>
+</html>
